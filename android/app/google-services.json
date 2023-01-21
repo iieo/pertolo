@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "719524969788",
+    "project_id": "pertolo-f3c7a",
+    "storage_bucket": "pertolo-f3c7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719524969788:android:696cd42af5a3c1d9767239",
+        "android_client_info": {
+          "package_name": "com.example.pertolo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719524969788-l1ub23spsp8o8mfd03cv03nh4a0cks6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGSZFX7hmSggp_F32_Y0sQxeo9aFjIuus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719524969788-l1ub23spsp8o8mfd03cv03nh4a0cks6t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "719524969788-8rc88epd6al8b556bvs01nqktb3ps4ig.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pertoloControl"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719524969788:android:efb19e0f0c90f80d767239",
+        "android_client_info": {
+          "package_name": "com.example.pertolo_control"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719524969788-l1ub23spsp8o8mfd03cv03nh4a0cks6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGSZFX7hmSggp_F32_Y0sQxeo9aFjIuus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719524969788-l1ub23spsp8o8mfd03cv03nh4a0cks6t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "719524969788-8rc88epd6al8b556bvs01nqktb3ps4ig.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pertoloControl"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
