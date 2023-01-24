@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:pertolo/app.dart';
 import 'package:pertolo/categories_screen.dart';
 import 'package:pertolo/screen_container.dart';
@@ -19,14 +20,26 @@ class GameScreen extends StatelessWidget {
 
   Future<List<String>?> _loadTasks() async {
     try {
+      List<String> categoryTasks = [];
+      if (category != "normal") {
+        QuerySnapshot snapshot = await FirebaseFirestore.instance
+            .collection('game')
+            .doc(category)
+            .collection("task")
+            .get();
+        categoryTasks =
+            snapshot.docs.map((doc) => _getContentFromDoc(doc)).toList();
+      }
       QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('game')
-          .doc(category)
+          .doc("normal")
           .collection("task")
           .get();
-      //get content of task collection
+      List<String> normalTasks =
+          snapshot.docs.map((doc) => _getContentFromDoc(doc)).toList();
 
-      return snapshot.docs.map((doc) => _getContentFromDoc(doc)).toList();
+      normalTasks.addAll(categoryTasks);
+      return normalTasks;
     } catch (e) {
       print(e);
       return null;
@@ -75,7 +88,13 @@ class GameState extends State<Game> {
   void initState() {
     super.initState();
     tasks = widget.tasks;
+    setLandscape();
     //TODO: filer tasks with two character '_'
+  }
+
+  Future setLandscape() async {
+    await SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   }
 
   String getNextTask() {
@@ -110,26 +129,26 @@ class GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(24),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-            child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    currentTask = getNextTask();
-                  });
-                },
-                child: Center(
-                    child: Text(
-                  getNextTask(),
-                  style: const TextStyle(
-                    color: App.secondaryColor,
-                    decoration: TextDecoration.none,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )))));
+    return GestureDetector(
+        onTap: () {
+          String nextTask = getNextTask();
+          setState(() {
+            currentTask = nextTask;
+          });
+        },
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Center(
+                child: Text(
+              currentTask,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: App.secondaryColor,
+                decoration: TextDecoration.none,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ))));
   }
 }

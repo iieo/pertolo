@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -79,6 +81,14 @@ class _OTAUpdateState extends State<OTAUpdate> {
   }
 
   Future<void> tryOtaUpdate() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (!result.isNotEmpty || !result[0].rawAddress.isNotEmpty) {
+        return;
+      }
+    } on SocketException catch (_) {
+      return;
+    }
     try {
       if (await _isUpToDate()) {
         setState(() {
